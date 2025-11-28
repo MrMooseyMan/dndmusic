@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DND Music — Ambiance for Your Adventures</title>
+    <meta name="description" content="Instantly find the perfect background music for your D&D campaigns. Battle, tavern, forest, dungeon — one click to immersion.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --parchment: #0d0b08;
+            --parchment-light: #1a1510;
+            --parchment-mid: #252015;
+            --ink: #e8dcc4;
+            --ink-dim: #8b7355;
+            --gold: #c9a227;
+            --gold-bright: #ffd700;
+            --ember: #8b2500;
+            --ember-glow: #ff4500;
+            --mystic: #4a3f6b;
+            --mystic-glow: #7b68ee;
+            --shadow: rgba(0, 0, 0, 0.8);
+
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Crimson Pro', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--parchment);
+            color: var(--ink);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Noise texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.04;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* Flickering torch glow effect */
+        @keyframes torchFlicker {
+            0%, 100% { opacity: 0.12; }
+            25% { opacity: 0.15; }
+            50% { opacity: 0.1; }
+            75% { opacity: 0.17; }
+        }
+
+        .torch-glow {
+            position: fixed;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .torch-glow-left {
+            top: -200px;
+            left: -300px;
+            background: radial-gradient(circle, var(--ember-glow) 0%, transparent 70%);
+            animation: torchFlicker 3s ease-in-out infinite;
+        }
+
+        .torch-glow-right {
+            top: -200px;
+            right: -300px;
+            background: radial-gradient(circle, var(--gold-bright) 0%, transparent 70%);
+            animation: torchFlicker 2.5s ease-in-out infinite 0.5s;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 2.5rem 2rem 1.5rem;
+            position: relative;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--ink);
+            text-shadow:
+                0 0 40px rgba(201, 162, 39, 0.4),
+                0 2px 4px var(--shadow);
+            margin-bottom: 0.25rem;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .tagline {
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: var(--ink-dim);
+            letter-spacing: 0.1em;
+        }
+
+        /* Decorative divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem auto;
+            max-width: 400px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--ink-dim), transparent);
+        }
+
+        .divider-icon {
+            color: var(--gold);
+            font-size: 1.25rem;
+        }
+
+        /* Main Layout - Two Column */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem 2rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Left Column - Scene Grid */
+        .scenes-section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--ink-dim);
+            margin-bottom: 1rem;
+        }
+
+        /* Quick Mood Filter */
+        .mood-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .mood-chip {
+            background: transparent;
+            border: 1px solid rgba(139, 115, 85, 0.4);
+            color: var(--ink-dim);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mood-chip:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .mood-chip.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--parchment);
+        }
+
+        .scenes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        /* Scene Card */
+        .scene-card {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+            border: 1px solid rgba(139, 115, 85, 0.2);
+        }
+
+        .scene-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0, 0, 0, 0.2) 40%,
+                rgba(0, 0, 0, 0.8) 100%
+            );
+            z-index: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .scene-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow:
+                0 15px 30px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(201, 162, 39, 0.1);
+            border-color: var(--gold);
+        }
+
+        .scene-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .scene-card:hover .scene-bg {
+            transform: scale(1.1);
+        }
+
+        .scene-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            z-index: 2;
+        }
+
+        .scene-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.25rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        }
+
+        .scene-title {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-shadow: 0 2px 4px var(--shadow);
+        }
+
+        .scene-card.active {
+            border-color: var(--gold);
+            box-shadow:
+                0 0 25px rgba(201, 162, 39, 0.25),
+                inset 0 0 20px rgba(201, 162, 39, 0.08);
+        }
+
+        .scene-card.active::after {
+            content: '♫';
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            color: var(--gold);
+            font-size: 1rem;
+            z-index: 3;
+            text-shadow: 0 0 10px rgba(201, 162, 39, 0.8);
+        }
+
+        /* Scene backgrounds */
+        .scene-tavern .scene-bg { background: linear-gradient(135deg, #4a3728 0%, #2d1f14 50%, #1a120a 100%); }
+        .scene-battle .scene-bg { background: linear-gradient(135deg, #5c1a1a 0%, #3d1111 50%, #1a0808 100%); }
+        .scene-forest .scene-bg { background: linear-gradient(135deg, #1a3d1a 0%, #0f2810 50%, #061206 100%); }
+        .scene-dungeon .scene-bg { background: linear-gradient(135deg, #2a2a3d 0%, #1a1a28 50%, #0a0a12 100%); }
+        .scene-town .scene-bg { background: linear-gradient(135deg, #4a4030 0%, #2d2820 50%, #1a1510 100%); }
+        .scene-ocean .scene-bg { background: linear-gradient(135deg, #1a3d5c 0%, #0f2840 50%, #061220 100%); }
+        .scene-mystery .scene-bg { background: linear-gradient(135deg, #3d2a5c 0%, #281a40 50%, #120a20 100%); }
+        .scene-boss .scene-bg { background: linear-gradient(135deg, #5c1a3d 0%, #401028 50%, #200812 100%); }
+        .scene-camp .scene-bg { background: linear-gradient(135deg, #3d3020 0%, #282010 50%, #141008 100%); }
+        .scene-cave .scene-bg { background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 50%, #0a0a0a 100%); }
+        .scene-castle .scene-bg { background: linear-gradient(135deg, #3d3d4a 0%, #282830 50%, #141418 100%); }
+        .scene-desert .scene-bg { background: linear-gradient(135deg, #5c4a28 0%, #403018 50%, #201808 100%); }
+
+        /* Right Column - Player & Description */
+        .player-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            position: sticky;
+            top: 1rem;
+            height: fit-content;
+        }
+
+        /* Ambient Sounds Panel */
+        .ambient-panel {
+            background: var(--parchment-light);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .ambient-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .ambient-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .ambient-master {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--ink-dim);
+        }
+
+        .ambient-sounds {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .ambient-btn {
+            background: var(--parchment);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            border-radius: 6px;
+            padding: 0.6rem 0.4rem;
+            color: var(--ink-dim);
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .ambient-btn:hover {
+            border-color: var(--gold);
+            color: var(--ink);
+        }
+
+        .ambient-btn.active {
+            background: rgba(201, 162, 39, 0.15);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .ambient-btn .icon {
+            font-size: 1.25rem;
+        }
+
+        /* Spotify Player */
+        .spotify-container {
+            background: var(--parchment-light);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .spotify-header {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spotify-label {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .spotify-scene-name {
+            font-size: 0.9rem;
+            color: var(--ink);
+        }
+
+        .spotify-embed {
+            width: 100%;
+            height: 352px;
+            border: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .spotify-embed.loaded {
+            opacity: 1;
+        }
+
+        .spotify-placeholder {
+            height: 352px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--ink-dim);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spotify-placeholder .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .spotify-placeholder p {
+            font-style: italic;
+        }
+
+        /* Volume slider styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            height: 4px;
+            background: var(--ink-dim);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .player-section {
+                position: static;
+                order: -1;
+            }
+
+            .scenes-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        @media (max-width: 500px) {
+            .scenes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ambient-sounds {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Intro animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .player-section {
+            animation: fadeInUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .scene-card {
+            opacity: 0;
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .scene-card:nth-child(1) { animation-delay: 0.1s; }
+        .scene-card:nth-child(2) { animation-delay: 0.13s; }
+        .scene-card:nth-child(3) { animation-delay: 0.16s; }
+        .scene-card:nth-child(4) { animation-delay: 0.19s; }
+        .scene-card:nth-child(5) { animation-delay: 0.22s; }
+        .scene-card:nth-child(6) { animation-delay: 0.25s; }
+        .scene-card:nth-child(7) { animation-delay: 0.28s; }
+        .scene-card:nth-child(8) { animation-delay: 0.31s; }
+        .scene-card:nth-child(9) { animation-delay: 0.34s; }
+        .scene-card:nth-child(10) { animation-delay: 0.37s; }
+        .scene-card:nth-child(11) { animation-delay: 0.4s; }
+        .scene-card:nth-child(12) { animation-delay: 0.43s; }
+
+        /* Visualizer bars for active ambient sounds */
+        @keyframes soundWave {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+
+        .sound-indicator {
+            display: none;
+            gap: 2px;
+            height: 12px;
+            align-items: flex-end;
+        }
+
+        .ambient-btn.active .sound-indicator {
+            display: flex;
+        }
+
+        .sound-indicator span {
+            width: 2px;
+            background: var(--gold);
+            animation: soundWave 0.8s ease-in-out infinite;
+        }
+
+        .sound-indicator span:nth-child(1) { animation-delay: 0s; height: 8px; }
+        .sound-indicator span:nth-child(2) { animation-delay: 0.2s; height: 12px; }
+        .sound-indicator span:nth-child(3) { animation-delay: 0.4s; height: 6px; }
+    </style>
+</head>
+<body>
+    <!-- Torch glow effects -->
+    <div class="torch-glow torch-glow-left"></div>
+    <div class="torch-glow torch-glow-right"></div>
+
+    <header>
+        <h1 class="logo">DND<span>Music</span></h1>
+        <p class="tagline">Ambiance for Your Adventures</p>
+        <div class="divider">
+            <span class="divider-icon">⚔</span>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Left Column - Scenes -->
+        <section class="scenes-section">
+            <div class="mood-bar">
+                <button class="mood-chip active" data-mood="all">All</button>
+                <button class="mood-chip" data-mood="calm">Calm</button>
+                <button class="mood-chip" data-mood="tense">Tense</button>
+                <button class="mood-chip" data-mood="epic">Epic</button>
+                <button class="mood-chip" data-mood="mysterious">Mysterious</button>
+            </div>
+
+            <h2 class="section-title">Choose Your Scene</h2>
+
+            <div class="scenes-grid">
+                <div class="scene-card scene-tavern" data-scene="tavern" data-mood="calm">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🍺</div>
+                        <h3 class="scene-title">Tavern</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-battle" data-scene="battle" data-mood="epic">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">⚔️</div>
+                        <h3 class="scene-title">Battle</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-forest" data-scene="forest" data-mood="calm">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🌲</div>
+                        <h3 class="scene-title">Forest</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-dungeon" data-scene="dungeon" data-mood="tense">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🗝️</div>
+                        <h3 class="scene-title">Dungeon</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-town" data-scene="town" data-mood="calm">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🏘️</div>
+                        <h3 class="scene-title">Town</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-ocean" data-scene="ocean" data-mood="calm">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">⚓</div>
+                        <h3 class="scene-title">Ocean</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-mystery" data-scene="mystery" data-mood="mysterious">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🔮</div>
+                        <h3 class="scene-title">Mystery</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-boss" data-scene="boss" data-mood="epic">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🐉</div>
+                        <h3 class="scene-title">Boss Fight</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-camp" data-scene="camp" data-mood="calm">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🏕️</div>
+                        <h3 class="scene-title">Camp</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-cave" data-scene="cave" data-mood="tense">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🦇</div>
+                        <h3 class="scene-title">Cave</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-castle" data-scene="castle" data-mood="mysterious">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🏰</div>
+                        <h3 class="scene-title">Castle</h3>
+                    </div>
+                </div>
+
+                <div class="scene-card scene-desert" data-scene="desert" data-mood="tense">
+                    <div class="scene-bg"></div>
+                    <div class="scene-content">
+                        <div class="scene-icon">🏜️</div>
+                        <h3 class="scene-title">Desert</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Column - Player & Controls -->
+        <aside class="player-section">
+            <!-- Ambient Sounds -->
+            <div class="ambient-panel">
+                <div class="ambient-header">
+                    <span class="ambient-label">Layer Ambient Sounds</span>
+                    <div class="ambient-master">
+                        <input type="range" id="ambientVolume" min="0" max="100" value="50" style="width: 60px;">
+                    </div>
+                </div>
+                <div class="ambient-sounds">
+                    <button class="ambient-btn" data-sound="rain">
+                        <span class="icon">🌧️</span>
+                        <span>Rain</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="fire">
+                        <span class="icon">🔥</span>
+                        <span>Fire</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="wind">
+                        <span class="icon">💨</span>
+                        <span>Wind</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="thunder">
+                        <span class="icon">⛈️</span>
+                        <span>Thunder</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="birds">
+                        <span class="icon">🐦</span>
+                        <span>Birds</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="crowd">
+                        <span class="icon">👥</span>
+                        <span>Crowd</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="water">
+                        <span class="icon">💧</span>
+                        <span>Water</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="crickets">
+                        <span class="icon">🦗</span>
+                        <span>Crickets</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                    <button class="ambient-btn" data-sound="wolves">
+                        <span class="icon">🐺</span>
+                        <span>Wolves</span>
+                        <div class="sound-indicator"><span></span><span></span><span></span></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Spotify Player -->
+            <div class="spotify-container">
+                <div class="spotify-header">
+                    <span class="spotify-label">Music</span>
+                    <span class="spotify-scene-name" id="spotifySceneName">Select a scene</span>
+                </div>
+                <div id="spotifyPlayer">
+                    <div class="spotify-placeholder">
+                        <div class="icon">🎵</div>
+                        <p>Select a scene to load<br>curated D&D playlists</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Curated Spotify playlists for each scene
+        const scenePlaylists = {
+            tavern: {
+                name: 'Medieval Tavern',
+                playlistId: '2Y73njm5d4enXmGuuZokdl', // Medieval Tavern Ambient - 179K saves
+                description: 'Warm hearths, clinking mugs, and merry folk'
+            },
+            battle: {
+                name: 'Epic Battle',
+                playlistId: '3j6OoomA0n8B1pGQA83NtB', // DnD Epic Battle Music - 31.7K saves
+                description: 'Steel clashes and war drums thunder'
+            },
+            forest: {
+                name: 'Enchanted Forest',
+                playlistId: '06Xke4y8fpzrr4eMIuUARE', // DnD Forest Adventure
+                description: 'Ancient woods whisper secrets'
+            },
+            dungeon: {
+                name: 'Dark Dungeon',
+                playlistId: '2ictQMs4x5Ni1U6v0jHfpn', // DnD Dungeon Atmosphere - 4.2K saves
+                description: 'Shadows lurk in every corner'
+            },
+            town: {
+                name: 'Bustling Town',
+                playlistId: '4MDzUUHA0V2UC9nKNJxkXV', // DnD Ambient Exploration - 3.7K saves
+                description: 'Market chatter and cobblestone streets'
+            },
+            ocean: {
+                name: 'Ocean Voyage',
+                playlistId: '71Sg2qO4cCA5C7ZyjeTHfS', // DnD Sailing - 711 saves
+                description: 'Salt spray and creaking timbers'
+            },
+            mystery: {
+                name: 'Arcane Mystery',
+                playlistId: '0uADzKu4SM1f4yHKRuclZH', // DnD Dark Ambient - 18.5K saves
+                description: 'Hidden truths await discovery'
+            },
+            boss: {
+                name: 'Boss Confrontation',
+                playlistId: '7vs8BFwsJ86erekxx7WIxQ', // Boss Battle & Dungeon Music
+                description: 'The final challenge awaits'
+            },
+            camp: {
+                name: 'Campfire Rest',
+                playlistId: '314GRwl6tg6qyh33ac8aqv', // D&D Ambient - 18K saves
+                description: 'Starlit skies and crackling flames'
+            },
+            cave: {
+                name: 'Deep Cave',
+                playlistId: '0uADzKu4SM1f4yHKRuclZH', // Dark Ambient
+                description: 'Echoing drips and unseen eyes'
+            },
+            castle: {
+                name: 'Royal Castle',
+                playlistId: '0vqGWjT0g9uLni6F8VKv9g', // DnD Background Music - 50.4K saves
+                description: 'Grand halls and royal intrigue'
+            },
+            desert: {
+                name: 'Scorching Desert',
+                playlistId: '4MDzUUHA0V2UC9nKNJxkXV', // Ambient Exploration
+                description: 'Ancient sands hold buried secrets'
+            }
+        };
+
+        // Audio context for procedural ambient sounds
+        let audioContext = null;
+        const activeSounds = {};
+        let masterVolume = 0.5;
+
+        // Initialize audio context on first user interaction
+        function initAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            return audioContext;
+        }
+
+        // Procedural sound generators
+        const soundGenerators = {
+            rain: (ctx) => {
+                const bufferSize = 2 * ctx.sampleRate;
+                const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const whiteNoise = ctx.createBufferSource();
+                whiteNoise.buffer = noiseBuffer;
+                whiteNoise.loop = true;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'highpass';
+                filter.frequency.value = 800;
+
+                const filter2 = ctx.createBiquadFilter();
+                filter2.type = 'lowpass';
+                filter2.frequency.value = 4000;
+
+                const gain = ctx.createGain();
+                gain.gain.value = 0.15;
+
+                whiteNoise.connect(filter);
+                filter.connect(filter2);
+                filter2.connect(gain);
+
+                return { source: whiteNoise, gain: gain };
+            },
+
+            fire: (ctx) => {
+                const bufferSize = 2 * ctx.sampleRate;
+                const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = ctx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 400;
+
+                // Add crackling LFO
+                const lfo = ctx.createOscillator();
+                lfo.frequency.value = 3 + Math.random() * 5;
+                const lfoGain = ctx.createGain();
+                lfoGain.gain.value = 150;
+                lfo.connect(lfoGain);
+                lfoGain.connect(filter.frequency);
+                lfo.start();
+
+                const gain = ctx.createGain();
+                gain.gain.value = 0.2;
+
+                noise.connect(filter);
+                filter.connect(gain);
+
+                return { source: noise, gain: gain, lfo: lfo };
+            },
+
+            wind: (ctx) => {
+                const bufferSize = 2 * ctx.sampleRate;
+                const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = ctx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 300;
+                filter.Q.value = 0.5;
+
+                // Slowly modulate the filter
+                const lfo = ctx.createOscillator();
+                lfo.frequency.value = 0.1;
+                const lfoGain = ctx.createGain();
+                lfoGain.gain.value = 200;
+                lfo.connect(lfoGain);
+                lfoGain.connect(filter.frequency);
+                lfo.start();
+
+                const gain = ctx.createGain();
+                gain.gain.value = 0.12;
+
+                noise.connect(filter);
+                filter.connect(gain);
+
+                return { source: noise, gain: gain, lfo: lfo };
+            },
+
+            thunder: (ctx) => {
+                // Low rumbling with occasional booms
+                const bufferSize = 2 * ctx.sampleRate;
+                const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = ctx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 150;
+
+                const gain = ctx.createGain();
+                gain.gain.value = 0.08;
+
+                // Random thunder booms
+                const boom = () => {
+                    if (!activeSounds.thunder) return;
+                    gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.08, ctx.currentTime + 2);
+                    setTimeout(boom, 8000 + Math.random() * 15000);
+                };
+                setTimeout(boom, 3000 + Math.random() * 5000);
+
+                noise.connect(filter);
+                filter.connect(gain);
+
+                return { source: noise, gain: gain };
+            },
+
+            birds: (ctx) => {
+                // Chirping birds using oscillators
+                const gain = ctx.createGain();
+                gain.gain.value = 0.06;
+
+                const chirp = () => {
+                    if (!activeSounds.birds) return;
+
+                    const osc = ctx.createOscillator();
+                    const oscGain = ctx.createGain();
+
+                    osc.frequency.value = 2000 + Math.random() * 2000;
+                    osc.type = 'sine';
+
+                    oscGain.gain.setValueAtTime(0, ctx.currentTime);
+                    oscGain.gain.linearRampToValueAtTime(0.3, ctx.currentTime + 0.02);
+                    oscGain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+
+                    osc.connect(oscGain);
+                    oscGain.connect(gain);
+
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.2);
+
+                    setTimeout(chirp, 500 + Math.random() * 2000);
+                };
+
+                setTimeout(chirp, 500);
+
+                // Dummy source for consistency
+                const bufferSize = ctx.sampleRate;
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const silence = ctx.createBufferSource();
+                silence.buffer = buffer;
+                silence.loop = true;
+                silence.connect(gain);
+
+                return { source: silence, gain: gain };
+            },
+
+            crowd: (ctx) => {
+                const bufferSize = 2 * ctx.sampleRate;
+                const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = ctx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 800;
+                filter.Q.value = 0.3;
+
+                const filter2 = ctx.createBiquadFilter();
+                filter2.type = 'lowpass';
+                filter2.frequency.value = 2000;
+
+                const gain = ctx.createGain();
+                gain.gain.value = 0.1;
+
+                noise.connect(filter);
+                filter.connect(filter2);
+                filter2.connect(gain);
+
+                return { source: noise, gain: gain };
+            },
+
+            water: (ctx) => {
+                const bufferSize = 2 * ctx.sampleRate;
+                const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                const noise = ctx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 500;
+                filter.Q.value = 1;
+
+                const lfo = ctx.createOscillator();
+                lfo.frequency.value = 0.3;
+                const lfoGain = ctx.createGain();
+                lfoGain.gain.value = 200;
+                lfo.connect(lfoGain);
+                lfoGain.connect(filter.frequency);
+                lfo.start();
+
+                const gain = ctx.createGain();
+                gain.gain.value = 0.1;
+
+                noise.connect(filter);
+                filter.connect(gain);
+
+                return { source: noise, gain: gain, lfo: lfo };
+            },
+
+            crickets: (ctx) => {
+                const gain = ctx.createGain();
+                gain.gain.value = 0.05;
+
+                const chirp = () => {
+                    if (!activeSounds.crickets) return;
+
+                    const osc = ctx.createOscillator();
+                    const oscGain = ctx.createGain();
+
+                    osc.frequency.value = 4000 + Math.random() * 1000;
+                    osc.type = 'sine';
+
+                    // Rapid on-off pattern
+                    const now = ctx.currentTime;
+                    for (let i = 0; i < 6; i++) {
+                        oscGain.gain.setValueAtTime(0.2, now + i * 0.05);
+                        oscGain.gain.setValueAtTime(0, now + i * 0.05 + 0.025);
+                    }
+
+                    osc.connect(oscGain);
+                    oscGain.connect(gain);
+
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.35);
+
+                    setTimeout(chirp, 200 + Math.random() * 800);
+                };
+
+                setTimeout(chirp, 200);
+
+                const bufferSize = ctx.sampleRate;
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const silence = ctx.createBufferSource();
+                silence.buffer = buffer;
+                silence.loop = true;
+                silence.connect(gain);
+
+                return { source: silence, gain: gain };
+            },
+
+            wolves: (ctx) => {
+                const gain = ctx.createGain();
+                gain.gain.value = 0.1;
+
+                const howl = () => {
+                    if (!activeSounds.wolves) return;
+
+                    const osc = ctx.createOscillator();
+                    const oscGain = ctx.createGain();
+
+                    osc.type = 'sine';
+
+                    const now = ctx.currentTime;
+                    // Howl frequency sweep
+                    osc.frequency.setValueAtTime(200, now);
+                    osc.frequency.linearRampToValueAtTime(400, now + 0.5);
+                    osc.frequency.linearRampToValueAtTime(350, now + 2);
+                    osc.frequency.linearRampToValueAtTime(200, now + 3);
+
+                    oscGain.gain.setValueAtTime(0, now);
+                    oscGain.gain.linearRampToValueAtTime(0.3, now + 0.3);
+                    oscGain.gain.setValueAtTime(0.3, now + 2);
+                    oscGain.gain.exponentialRampToValueAtTime(0.01, now + 3.5);
+
+                    osc.connect(oscGain);
+                    oscGain.connect(gain);
+
+                    osc.start();
+                    osc.stop(ctx.currentTime + 4);
+
+                    setTimeout(howl, 15000 + Math.random() * 20000);
+                };
+
+                setTimeout(howl, 2000 + Math.random() * 5000);
+
+                const bufferSize = ctx.sampleRate;
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const silence = ctx.createBufferSource();
+                silence.buffer = buffer;
+                silence.loop = true;
+                silence.connect(gain);
+
+                return { source: silence, gain: gain };
+            }
+        };
+
+        // Toggle ambient sound
+        function toggleSound(soundName) {
+            const ctx = initAudio();
+
+            if (activeSounds[soundName]) {
+                // Stop sound
+                activeSounds[soundName].source.stop();
+                if (activeSounds[soundName].lfo) {
+                    activeSounds[soundName].lfo.stop();
+                }
+                delete activeSounds[soundName];
+                return false;
+            } else {
+                // Start sound
+                const generator = soundGenerators[soundName];
+                if (generator) {
+                    const sound = generator(ctx);
+                    sound.gain.connect(ctx.destination);
+                    sound.gain.gain.value *= masterVolume;
+                    sound.source.start();
+                    activeSounds[soundName] = sound;
+                    return true;
+                }
+            }
+        }
+
+        // Update master volume
+        function updateMasterVolume(value) {
+            masterVolume = value;
+            Object.values(activeSounds).forEach(sound => {
+                if (sound.gain) {
+                    // Maintain relative volumes
+                    const baseVolume = parseFloat(sound.gain.gain.value) / masterVolume || 0.1;
+                    sound.gain.gain.value = baseVolume * masterVolume;
+                }
+            });
+        }
+
+        // DOM Elements
+        const sceneCards = document.querySelectorAll('.scene-card');
+        const moodChips = document.querySelectorAll('.mood-chip');
+        const ambientBtns = document.querySelectorAll('.ambient-btn');
+        const ambientVolume = document.getElementById('ambientVolume');
+        const spotifyPlayer = document.getElementById('spotifyPlayer');
+        const spotifySceneName = document.getElementById('spotifySceneName');
+
+        let currentScene = null;
+
+        // Scene card click handlers
+        sceneCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const scene = card.dataset.scene;
+                selectScene(scene);
+
+                // Initialize audio context on user interaction
+                initAudio();
+            });
+        });
+
+        function selectScene(scene) {
+            // Update active states
+            sceneCards.forEach(c => c.classList.remove('active'));
+            document.querySelector(`[data-scene="${scene}"]`).classList.add('active');
+
+            currentScene = scene;
+            const sceneData = scenePlaylists[scene];
+
+            // Update UI
+            spotifySceneName.textContent = sceneData.name;
+
+            // Load Spotify embed
+            spotifyPlayer.innerHTML = `
+                <iframe
+                    class="spotify-embed"
+                    src="https://open.spotify.com/embed/playlist/${sceneData.playlistId}?utm_source=generator&theme=0"
+                    allowfullscreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    onload="this.classList.add('loaded')"
+                ></iframe>
+            `;
+        }
+
+        // Mood filter
+        moodChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                moodChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+
+                const mood = chip.dataset.mood;
+
+                sceneCards.forEach(card => {
+                    if (mood === 'all' || card.dataset.mood === mood) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Ambient sound buttons
+        ambientBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const sound = btn.dataset.sound;
+                const isActive = toggleSound(sound);
+                btn.classList.toggle('active', isActive);
+            });
+        });
+
+        // Ambient volume control
+        ambientVolume.addEventListener('input', (e) => {
+            updateMasterVolume(e.target.value / 100);
+        });
+    </script>
+</body>
+</html>
