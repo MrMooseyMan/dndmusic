@@ -125,6 +125,36 @@
             letter-spacing: 0.1em;
         }
 
+        /* Support Button */
+        .support-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: linear-gradient(135deg, #ff5e5b 0%, #ff3333 100%);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(255, 94, 91, 0.3);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .support-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 94, 91, 0.4);
+        }
+
+        .support-btn .heart {
+            font-size: 1.1rem;
+        }
+
         /* Decorative divider */
         .divider {
             display: flex;
@@ -565,6 +595,12 @@
     <!-- Torch glow effects -->
     <div class="torch-glow torch-glow-left"></div>
     <div class="torch-glow torch-glow-right"></div>
+
+    <!-- Ko-fi Support Button -->
+    <a href="https://ko-fi.com/dndmusic" target="_blank" rel="noopener" class="support-btn">
+        <span class="heart">☕</span>
+        <span>Support Us</span>
+    </a>
 
     <header>
         <h1 class="logo">DND<span>Music</span></h1>
