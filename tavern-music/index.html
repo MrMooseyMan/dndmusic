@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Tavern Music | Free Medieval Tavern Ambiance for Your Campaign</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2R0ZD8TFY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G2R0ZD8TFY');
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free D&D tavern music and medieval inn ambiance for your tabletop RPG sessions. One-click access to curated Spotify playlists perfect for tavern scenes, with layerable ambient sounds.">
+    <meta name="keywords" content="dnd tavern music, medieval tavern ambiance, fantasy inn music, rpg tavern sounds, d&d background music, tavern playlist, dungeons and dragons music">
+    <link rel="canonical" href="https://dndmusic.net/tavern-music/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="D&D Tavern Music | Free Medieval Tavern Ambiance">
+    <meta property="og:description" content="Free tavern music and medieval inn ambiance for your D&D campaigns. Curated playlists with layerable ambient sounds.">
+    <meta property="og:url" content="https://dndmusic.net/tavern-music/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DND Music">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="D&D Tavern Music | Free Medieval Tavern Ambiance">
+    <meta name="twitter:description" content="Free tavern music for your D&D campaigns. One-click access to curated playlists.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --parchment: #0d0b08;
+            --parchment-light: #1a1510;
+            --ink: #e8dcc4;
+            --ink-dim: #8b7355;
+            --gold: #c9a227;
+            --gold-bright: #ffd700;
+            --ember: #8b2500;
+            --shadow: rgba(0, 0, 0, 0.8);
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Crimson Pro', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--parchment);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover { color: var(--gold-bright); }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 40px rgba(201, 162, 39, 0.3);
+        }
+
+        h1 span { color: var(--gold); }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--ink-dim);
+            font-style: italic;
+        }
+
+        /* Main Content */
+        .intro {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Player Section */
+        .player-wrapper {
+            background: var(--parchment-light);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .player-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .spotify-embed {
+            width: 100%;
+            height: 380px;
+            border: none;
+        }
+
+        /* CTA Button */
+        .cta-section {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1) 0%, rgba(139, 37, 0, 0.1) 100%);
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%);
+            color: var(--parchment);
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
+        }
+
+        /* Content Sections */
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--ink);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        li { margin-bottom: 0.5rem; }
+
+        /* Related Scenes */
+        .related-scenes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .scene-link {
+            display: block;
+            padding: 1.25rem;
+            background: var(--parchment-light);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--ink);
+            transition: all 0.3s;
+        }
+
+        .scene-link:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .scene-link .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .scene-link .name { font-family: var(--font-display); font-size: 1rem; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(139, 115, 85, 0.2);
+            margin-top: 3rem;
+            color: var(--ink-dim);
+            font-size: 0.9rem;
+        }
+
+        footer a { color: var(--gold); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        /* Schema.org structured data styling */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "D&D Tavern Music - Free Medieval Tavern Ambiance",
+        "description": "Free D&D tavern music and medieval inn ambiance for tabletop RPG sessions",
+        "url": "https://dndmusic.net/tavern-music/",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "DND Music",
+            "url": "https://dndmusic.net"
+        },
+        "mainEntity": {
+            "@type": "MusicPlaylist",
+            "name": "Medieval Tavern Ambient",
+            "description": "Curated playlist of medieval tavern music for D&D and tabletop RPG sessions",
+            "numTracks": 100
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="back-link">← Back to All Scenes</a>
+            <h1>D&D <span>Tavern Music</span></h1>
+            <p class="subtitle">Medieval Inn Ambiance for Your Campaign</p>
+        </header>
+
+        <main>
+            <p class="intro">
+                Set the perfect mood for your tavern scenes with our curated playlist of medieval tavern music.
+                Whether your party is gathering information, meeting a mysterious contact, or simply enjoying
+                some well-earned rest, this ambiance will transport them to a warm, bustling inn.
+            </p>
+
+            <!-- Spotify Player -->
+            <div class="player-wrapper">
+                <div class="player-header">
+                    <span class="player-label">Now Playing: Medieval Tavern Ambient</span>
+                    <span>🍺</span>
+                </div>
+                <iframe
+                    class="spotify-embed"
+                    src="https://open.spotify.com/embed/playlist/2Y73njm5d4enXmGuuZokdl?utm_source=generator&theme=0"
+                    allowfullscreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section">
+                <p style="margin-bottom: 1rem;">Want more scenes? Layer ambient sounds on top of your music?</p>
+                <a href="/" class="cta-button">Explore All Scenes →</a>
+            </div>
+
+            <!-- SEO Content -->
+            <article>
+                <h2>The Perfect Tavern Atmosphere</h2>
+                <p>
+                    Every D&D campaign eventually finds its way to a tavern. It's where adventures begin,
+                    rumors spread, and weary heroes find respite. Our tavern music playlist features:
+                </p>
+                <ul>
+                    <li><strong>Medieval instrumentals</strong> — Lutes, harps, and period-appropriate melodies</li>
+                    <li><strong>Warm, inviting tones</strong> — Perfect for roleplay-heavy sessions</li>
+                    <li><strong>Subtle background music</strong> — Enhances the mood without overpowering conversation</li>
+                    <li><strong>100+ tracks</strong> — Hours of music so you never hear the same song twice</li>
+                </ul>
+
+                <h2>When to Use Tavern Music</h2>
+                <h3>Classic Tavern Scenes</h3>
+                <p>
+                    Use this playlist whenever your party visits an inn, tavern, or pub. It's perfect for
+                    the Yawning Portal, the Prancing Pony, or any cozy establishment in your homebrew world.
+                </p>
+
+                <h3>Social Encounters</h3>
+                <p>
+                    Tavern music works great for any social situation — noble feasts, merchant negotiations,
+                    or underground gambling dens. The warm tones help players relax and engage in roleplay.
+                </p>
+
+                <h3>Downtime & Rest</h3>
+                <p>
+                    When the party takes a long rest in civilization, tavern ambiance reminds them they're
+                    safe (for now) and helps transition between intense adventure scenes.
+                </p>
+
+                <h2>Pro DM Tips</h2>
+                <ul>
+                    <li><strong>Layer with crowd sounds</strong> — Add our "Crowd" ambient layer for a busier feel</li>
+                    <li><strong>Add fire crackling</strong> — The "Fire" layer creates a cozy hearth atmosphere</li>
+                    <li><strong>Keep volume low</strong> — Background music should enhance, not distract</li>
+                    <li><strong>Fade during key moments</strong> — Lower the music when important NPCs speak</li>
+                </ul>
+
+                <h2>More Scene Music</h2>
+                <p>Explore our other curated playlists for different campaign moments:</p>
+
+                <div class="related-scenes">
+                    <a href="/battle-music/" class="scene-link">
+                        <div class="icon">⚔️</div>
+                        <div class="name">Battle Music</div>
+                    </a>
+                    <a href="/dungeon-ambiance/" class="scene-link">
+                        <div class="icon">🗝️</div>
+                        <div class="name">Dungeon Ambiance</div>
+                    </a>
+                    <a href="/forest-ambiance/" class="scene-link">
+                        <div class="icon">🌲</div>
+                        <div class="name">Forest Ambiance</div>
+                    </a>
+                    <a href="/" class="scene-link">
+                        <div class="icon">🎵</div>
+                        <div class="name">All Scenes</div>
+                    </a>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>
+                <a href="/">DND Music</a> — Free ambiance for your tabletop adventures<br>
+                <a href="https://ko-fi.com/dndmusic" target="_blank" rel="noopener">☕ Support Us</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>

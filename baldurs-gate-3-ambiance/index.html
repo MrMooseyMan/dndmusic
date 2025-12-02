@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baldur's Gate 3 Style Ambiance | BG3 Music for Your D&D Campaign</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2R0ZD8TFY"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-G2R0ZD8TFY');
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Baldur's Gate 3 style music and ambiance for your tabletop D&D campaigns. Capture the epic feel of BG3 with curated playlists inspired by the game's soundtrack.">
+    <meta name="keywords" content="baldurs gate 3 music, bg3 ambiance, bg3 soundtrack, baldurs gate 3 tavern music, bg3 battle music, dnd music like bg3, larian soundtrack">
+    <link rel="canonical" href="https://dndmusic.net/baldurs-gate-3-ambiance/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Baldur's Gate 3 Style Ambiance | BG3 Music for D&D">
+    <meta property="og:description" content="Capture the epic feel of Baldur's Gate 3 in your tabletop campaigns with curated BG3-style playlists.">
+    <meta property="og:url" content="https://dndmusic.net/baldurs-gate-3-ambiance/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="DND Music">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Baldur's Gate 3 Style Ambiance | BG3 Music for D&D">
+    <meta name="twitter:description" content="BG3-style music for your tabletop D&D campaigns.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --parchment: #0d0b08;
+            --parchment-light: #1a1510;
+            --ink: #e8dcc4;
+            --ink-dim: #8b7355;
+            --gold: #c9a227;
+            --gold-bright: #ffd700;
+            --illithid: #5c1a3d;
+            --shadow: rgba(0, 0, 0, 0.8);
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Crimson Pro', serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--parchment);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gold);
+            text-decoration: none;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover { color: var(--gold-bright); }
+
+        h1 {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 40px rgba(92, 26, 61, 0.5);
+        }
+
+        h1 span { color: #ff69b4; }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--ink-dim);
+            font-style: italic;
+        }
+
+        .intro { font-size: 1.15rem; margin-bottom: 2rem; text-align: center; }
+
+        .player-wrapper {
+            background: var(--parchment-light);
+            border: 1px solid rgba(92, 26, 61, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .player-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .player-label {
+            font-family: var(--font-display);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ff69b4;
+        }
+
+        .spotify-embed { width: 100%; height: 380px; border: none; }
+
+        .cta-section {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(92, 26, 61, 0.2) 0%, rgba(201, 162, 39, 0.1) 100%);
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff69b4 0%, #5c1a3d 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 0.1em;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
+        }
+
+        h2 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(139, 115, 85, 0.2);
+        }
+
+        h3 {
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            color: var(--ink);
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        p { margin-bottom: 1rem; }
+        ul { margin: 1rem 0 1rem 1.5rem; }
+        li { margin-bottom: 0.5rem; }
+
+        .related-scenes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .scene-link {
+            display: block;
+            padding: 1.25rem;
+            background: var(--parchment-light);
+            border: 1px solid rgba(139, 115, 85, 0.3);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--ink);
+            transition: all 0.3s;
+        }
+
+        .scene-link:hover { border-color: var(--gold); transform: translateY(-2px); }
+        .scene-link .icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .scene-link .name { font-family: var(--font-display); font-size: 1rem; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(139, 115, 85, 0.2);
+            margin-top: 3rem;
+            color: var(--ink-dim);
+            font-size: 0.9rem;
+        }
+
+        footer a { color: var(--gold); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Baldur's Gate 3 Style Ambiance - BG3 Music for D&D",
+        "description": "Baldur's Gate 3 style music and ambiance for tabletop D&D campaigns",
+        "url": "https://dndmusic.net/baldurs-gate-3-ambiance/",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "DND Music",
+            "url": "https://dndmusic.net"
+        }
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="back-link">← Back to All Scenes</a>
+            <h1><span>Baldur's Gate 3</span> Style Ambiance</h1>
+            <p class="subtitle">Bring the BG3 Experience to Your Table</p>
+        </header>
+
+        <main>
+            <p class="intro">
+                Loved the atmosphere of Baldur's Gate 3? Bring that same epic, cinematic feel to your
+                tabletop campaigns. Our BG3-inspired playlists capture the essence of Larian's masterpiece
+                — from the haunting Nautiloid to the streets of Baldur's Gate itself.
+            </p>
+
+            <div class="player-wrapper">
+                <div class="player-header">
+                    <span class="player-label">Now Playing: BG3-Style Epic Fantasy</span>
+                    <span>🐉</span>
+                </div>
+                <iframe
+                    class="spotify-embed"
+                    src="https://open.spotify.com/embed/playlist/0vqGWjT0g9uLni6F8VKv9g?utm_source=generator&theme=0"
+                    allowfullscreen
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+                </iframe>
+            </div>
+
+            <div class="cta-section">
+                <p style="margin-bottom: 1rem;">Running a BG3-inspired campaign? We have all the scenes you need!</p>
+                <a href="/" class="cta-button">Explore All Scenes →</a>
+            </div>
+
+            <article>
+                <h2>The BG3 Sound</h2>
+                <p>
+                    Baldur's Gate 3's soundtrack by Borislav Slavov redefined fantasy game music. Our
+                    playlists capture that same feeling:
+                </p>
+                <ul>
+                    <li><strong>Orchestral grandeur</strong> — Full symphonic arrangements with emotional depth</li>
+                    <li><strong>Dark undertones</strong> — The threat of the Absolute looms in every note</li>
+                    <li><strong>Memorable themes</strong> — Leitmotifs that your players will recognize and love</li>
+                    <li><strong>Dynamic range</strong> — From intimate character moments to epic confrontations</li>
+                </ul>
+
+                <h2>Perfect For BG3-Style Scenes</h2>
+                <h3>The Nautiloid & Mind Flayers</h3>
+                <p>
+                    Running an illithid-themed campaign? The eerie, otherworldly tones perfectly capture
+                    the horror of ceremorphosis and the alien nature of mind flayers.
+                </p>
+
+                <h3>Exploration & Discovery</h3>
+                <p>
+                    BG3 excels at making exploration feel meaningful. Use this music when your party
+                    discovers ancient ruins, hidden treasures, or plot-critical locations.
+                </p>
+
+                <h3>Companion Moments</h3>
+                <p>
+                    Those quiet conversations at camp deserve appropriately emotional music. Perfect
+                    for character development scenes and party bonding.
+                </p>
+
+                <h2>Running BG3 Content at Your Table</h2>
+                <ul>
+                    <li><strong>Use familiar themes</strong> — Players who've played BG3 will feel instantly immersed</li>
+                    <li><strong>Match the mood</strong> — BG3 shifts tone frequently; so should your music</li>
+                    <li><strong>Layer ambience</strong> — Add our ambient sounds for camp scenes</li>
+                    <li><strong>Battle transitions</strong> — Have combat music ready for surprise encounters</li>
+                </ul>
+
+                <h2>More Scene Music</h2>
+                <div class="related-scenes">
+                    <a href="/battle-music/" class="scene-link">
+                        <div class="icon">⚔️</div>
+                        <div class="name">Battle Music</div>
+                    </a>
+                    <a href="/tavern-music/" class="scene-link">
+                        <div class="icon">🍺</div>
+                        <div class="name">Tavern Music</div>
+                    </a>
+                    <a href="/witcher-style-music/" class="scene-link">
+                        <div class="icon">🐺</div>
+                        <div class="name">Witcher Style</div>
+                    </a>
+                    <a href="/" class="scene-link">
+                        <div class="icon">🎵</div>
+                        <div class="name">All Scenes</div>
+                    </a>
+                </div>
+            </article>
+        </main>
+
+        <footer>
+            <p>
+                <a href="/">DND Music</a> — Free ambiance for your tabletop adventures<br>
+                <a href="https://ko-fi.com/dndmusic" target="_blank" rel="noopener">☕ Support Us</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
